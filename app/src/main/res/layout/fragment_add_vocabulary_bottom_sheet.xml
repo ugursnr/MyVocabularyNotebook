@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presenter.view.AddVocabularyBottomSheetFragment"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/vocabularyActualET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:hint="@string/vocabulary"
+
+        />
+    <EditText
+        android:id="@+id/vocabularyTranslationET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:hint="@string/translation"
+
+        />
+    <EditText
+        android:id="@+id/vocabularySampleSentenceET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:hint="@string/sample_sentence"
+
+        />
+
+    <Button
+        android:id="@+id/addOrUpdateVocabularyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/add_vocabulary"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_12ssp"
+        android:background ="@drawable/button_shape2_main"
+        android:layout_margin="@dimen/_5sdp"
+
+        />
+
+</LinearLayout>

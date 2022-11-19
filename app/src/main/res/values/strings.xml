@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">My Vocabulary Notebook</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="home_title">My Vocabularies</string>
+
+    <string name="vocabulary">Vocabulary</string>
+    <string name="translation">Translation</string>
+    <string name="sample_sentence">Sample Sentence</string>
+
+    <string name="add_vocabulary">Add</string>
+    <string name="update_vocabulary">Update</string>
 </resources>

@@ -10,7 +10,7 @@ interface VocabularyDao {
     fun insertVocabulary(vocabulary: Vocabulary)
 
     @Update
-    fun updateVocabulary(vocabularyId : Int)
+    fun updateVocabulary(vocabulary : Vocabulary)
 
     @Delete
     fun deleteVocabulary(vocabulary: Vocabulary)

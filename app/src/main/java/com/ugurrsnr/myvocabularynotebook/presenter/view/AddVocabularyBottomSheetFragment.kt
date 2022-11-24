@@ -23,6 +23,7 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
     private var vocabularyInput : String? = null
     private var translationInput : String? = null
     private var sampleSentenceInput : String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,16 +35,17 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedViewModel = ViewModelProvider(this)[AddVocabularySharedViewModel::class.java]
-
+        //sharedViewModel = ViewModelProvider(this)[AddVocabularySharedViewModel::class.java]
+        sharedViewModel = (activity as MainActivity).sharedViewModel
         binding.addOrUpdateVocabularyButton.setOnClickListener {
+
             vocabularyInput = binding.vocabularyActualET.text.toString()
             translationInput = binding.vocabularyTranslationET.text.toString()
             sampleSentenceInput = binding.vocabularySampleSentenceET.text.toString()
 
             val inputVocabulary = Vocabulary(vocabularyInput,translationInput,sampleSentenceInput)
             insertVocabularyToDB(inputVocabulary)
-
+            sharedViewModel.getAllVocabulariesFromDB()
             dismiss()
 
         }

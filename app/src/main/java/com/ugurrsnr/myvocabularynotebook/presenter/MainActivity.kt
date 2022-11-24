@@ -12,11 +12,9 @@ import com.ugurrsnr.myvocabularynotebook.presenter.viewmodel.AddVocabularyShared
  */
 
 class MainActivity : AppCompatActivity() {
-    lateinit var sharedViewModel: AddVocabularySharedViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        sharedViewModel = ViewModelProvider(this)[AddVocabularySharedViewModel::class.java]
 
     }
 }

@@ -11,20 +11,7 @@ import com.ugurrsnr.myvocabularynotebook.domain.model.Vocabulary
 class VocabulariesHomeAdapter : RecyclerView.Adapter<VocabulariesHomeAdapter.VocabulariesHomeViewHolder>() {
 
     lateinit var onItemDeleteClicked : ((Vocabulary) -> Unit)
-    /*
-    private val difUtil = object : DiffUtil.ItemCallback<Vocabulary>(){
-        override fun areItemsTheSame(oldItem: Vocabulary, newItem: Vocabulary): Boolean {
-            return oldItem.vocabularyID == newItem.vocabularyID
-        }
-
-        override fun areContentsTheSame(oldItem: Vocabulary, newItem: Vocabulary): Boolean {
-            return oldItem == newItem
-        }
-
-    }
-    val differ = AsyncListDiffer(this,difUtil)
-
-     */
+    lateinit var onItemClicked : ((Vocabulary) -> Unit)
 
     val allVocabulariesList = arrayListOf<Vocabulary>()
     class VocabulariesHomeViewHolder(val binding : RecyclerRowBinding) : RecyclerView.ViewHolder(binding.root)
@@ -34,7 +21,6 @@ class VocabulariesHomeAdapter : RecyclerView.Adapter<VocabulariesHomeAdapter.Voc
     }
 
     override fun onBindViewHolder(holder: VocabulariesHomeViewHolder, position: Int) {
-        //val vocabulary = differ.currentList[position]
         val vocabulary = allVocabulariesList[position]
         holder.binding.apply {
             actualWordTV.text = vocabulary.vocabulary
@@ -44,9 +30,11 @@ class VocabulariesHomeAdapter : RecyclerView.Adapter<VocabulariesHomeAdapter.Voc
                 onItemDeleteClicked.invoke(vocabulary)
                 notifyItemRemoved(position)
             }
+
         }
-
-
+        holder.itemView.setOnClickListener {
+            onItemClicked.invoke(allVocabulariesList[position])
+        }
 
     }
 

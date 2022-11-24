@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ugurrsnr.myvocabularynotebook.data.local.VocabularyDatabase
 import com.ugurrsnr.myvocabularynotebook.domain.model.Vocabulary
 import com.ugurrsnr.myvocabularynotebook.domain.repo.VocabularyRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class AddVocabularySharedViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -50,17 +47,6 @@ class AddVocabularySharedViewModel(application: Application) : AndroidViewModel(
         }
 
     }
-
-    /*
-
-
-
-3
-
-    fun getVocabularyDetailsByID(vocabularyID : Int) : List<Vocabulary> {
-        return dao.getVocabularyDetailsByID(vocabularyID)
-    }
-     */
 
 
 }

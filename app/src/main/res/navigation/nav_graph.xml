@@ -22,5 +22,9 @@
         <action
             android:id="@+id/action_addVocabularyBottomSheetFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="vocabularyID"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </dialog>
 </navigation>

@@ -11,4 +11,6 @@
 
     <string name="add_vocabulary">Add</string>
     <string name="update_vocabulary">Update</string>
+
+    <string name="update">Update</string>
 </resources>

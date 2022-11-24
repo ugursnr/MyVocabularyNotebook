@@ -1,12 +1,12 @@
 package com.ugurrsnr.myvocabularynotebook.presenter.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ugurrsnr.myvocabularynotebook.R
 import com.ugurrsnr.myvocabularynotebook.databinding.FragmentAddVocabularyBottomSheetBinding
@@ -24,6 +24,9 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
     private var translationInput : String? = null
     private var sampleSentenceInput : String? = null
 
+    private var vocabularyIDArgs : Int = -1
+    private lateinit var vocabulary: Vocabulary
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,19 +39,64 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //sharedViewModel = ViewModelProvider(this)[AddVocabularySharedViewModel::class.java]
-        sharedViewModel = (activity as MainActivity).sharedViewModel
-        binding.addOrUpdateVocabularyButton.setOnClickListener {
+        sharedViewModel = ViewModelProvider(requireActivity()).get(AddVocabularySharedViewModel::class.java)
 
-            vocabularyInput = binding.vocabularyActualET.text.toString()
-            translationInput = binding.vocabularyTranslationET.text.toString()
-            sampleSentenceInput = binding.vocabularySampleSentenceET.text.toString()
+        arguments?.let {
+            vocabularyIDArgs = AddVocabularyBottomSheetFragmentArgs.fromBundle(it).vocabularyID
+        }
 
-            val inputVocabulary = Vocabulary(vocabularyInput,translationInput,sampleSentenceInput)
-            insertVocabularyToDB(inputVocabulary)
-            sharedViewModel.getAllVocabulariesFromDB()
-            dismiss()
+        if ( vocabularyIDArgs == -1){
+            binding.addOrUpdateVocabularyButton.setOnClickListener {
+
+                vocabularyInput = binding.vocabularyActualET.text.toString()
+                translationInput = binding.vocabularyTranslationET.text.toString()
+                sampleSentenceInput = binding.vocabularySampleSentenceET.text.toString()
+
+                val inputVocabulary = Vocabulary(vocabularyInput,translationInput,sampleSentenceInput)
+                insertVocabularyToDB(inputVocabulary)
+
+                dismiss()
+                sharedViewModel.getAllVocabulariesFromDB()
+
+            }
+        }else{
+
+
+            sharedViewModel.getVocabularyDetailsByID(vocabularyIDArgs)
+            sharedViewModel.vocabularyLiveData.observe(viewLifecycleOwner, Observer {
+
+                val vocabularyName = it.vocabulary
+                val vocabularyTranslation = it.vocabularyTranslation
+                val vocabularySample = it.sampleSentence
+
+                vocabulary = Vocabulary(vocabularyName, vocabularyTranslation, vocabularySample)
+                vocabulary.vocabularyID = it.vocabularyID
+
+                setUIWithVocabularyInfo(vocabularyName, vocabularyTranslation, vocabularySample)
+
+            })
+
+            binding.addOrUpdateVocabularyButton.apply {
+                text = getText(R.string.update)
+                setOnClickListener {
+
+                    vocabularyInput = binding.vocabularyActualET.text.toString()
+                    translationInput = binding.vocabularyTranslationET.text.toString()
+                    sampleSentenceInput = binding.vocabularySampleSentenceET.text.toString()
+
+                    val updatedVocabulary = Vocabulary(vocabularyInput, translationInput, sampleSentenceInput )
+                    updatedVocabulary.vocabularyID = vocabularyIDArgs
+
+                    sharedViewModel.updateVocabulary(vocabulary)
+                    dismiss()
+                    sharedViewModel.getAllVocabulariesFromDB()
+                }
+            }
 
         }
+
+
+
 
     }
 
@@ -56,11 +104,16 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
         sharedViewModel.insertVocabulary(vocabulary)
     }
 
-
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = AddVocabularyBottomSheetFragment()
+    private fun updateVocabularyOnDB(vocabulary : Vocabulary){
+        sharedViewModel.updateVocabulary(vocabulary)
     }
+
+    private fun setUIWithVocabularyInfo(vocabularyName : String?, translation : String?, sample : String?){
+        binding.apply {
+            vocabularyActualET.setText(vocabularyName)
+            vocabularyTranslationET.setText(translation)
+            vocabularySampleSentenceET.setText(sample)
+        }
+    }
+
 }

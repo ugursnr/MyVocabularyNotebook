@@ -35,17 +35,27 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //sharedViewModel = ViewModelProvider(this)[AddVocabularySharedViewModel::class.java]
-        sharedViewModel = (activity as MainActivity).sharedViewModel
+        sharedViewModel = ViewModelProvider(requireActivity()).get(AddVocabularySharedViewModel::class.java)
         sharedViewModel.getAllVocabulariesFromDB()
-        observeAllVocabularies()
         prepareRecyclerView()
+        observeAllVocabularies()
+
         addVocabularyOnClick()
 
-        vocabularyAdapter.onItemDeleteClicked = {
-            sharedViewModel.deleteVocabulary(it)
-            observeAllVocabularies()
-
+        vocabularyAdapter.apply {
+            onItemDeleteClicked = {
+                sharedViewModel.deleteVocabulary(it)
+                sharedViewModel.getAllVocabulariesFromDB()
+                observeAllVocabularies()
+            }
+            onItemClicked = {
+                val action = HomeFragmentDirections.actionHomeFragmentToAddVocabularyBottomSheetFragment()
+                action.vocabularyID = it.vocabularyID
+                Navigation.findNavController(requireView()).navigate(action)
+            }
         }
+
+
 
     }
 

@@ -12,8 +12,8 @@ class VocabularyRepository(val dao : VocabularyDao) {
         dao.insertVocabulary(vocabulary)
     }
 
-    fun updateVocabulary(vocabulary : Vocabulary){
-        dao.updateVocabulary(vocabulary)
+    fun updateVocabulary(vocabularyID : Int, vocabularyName : String?, vocabularyTranslation : String?, sampleSentence : String?){
+        dao.updateVocabulary(vocabularyID , vocabularyName , vocabularyTranslation , sampleSentence)
     }
 
     fun deleteVocabulary(vocabulary: Vocabulary){

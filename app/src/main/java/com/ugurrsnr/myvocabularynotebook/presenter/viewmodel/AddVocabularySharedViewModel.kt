@@ -22,8 +22,8 @@ class AddVocabularySharedViewModel(application: Application) : AndroidViewModel(
     fun insertVocabulary(vocabulary: Vocabulary) = CoroutineScope(Dispatchers.IO).launch {
         repository.insertVocabulary(vocabulary)
     }
-    fun updateVocabulary(vocabulary: Vocabulary) = CoroutineScope(Dispatchers.IO).launch {
-        repository.updateVocabulary(vocabulary)
+    fun updateVocabulary(vocabularyID : Int, vocabularyName : String?, vocabularyTranslation : String?, sampleSentence : String?) = CoroutineScope(Dispatchers.IO).launch {
+        repository.updateVocabulary(vocabularyID, vocabularyName , vocabularyTranslation , sampleSentence )
     }
     fun deleteVocabulary(vocabulary: Vocabulary) = CoroutineScope(Dispatchers.IO).launch {
         repository.deleteVocabulary(vocabulary)

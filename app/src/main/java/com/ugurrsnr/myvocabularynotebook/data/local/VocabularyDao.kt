@@ -9,8 +9,12 @@ interface VocabularyDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertVocabulary(vocabulary: Vocabulary)
 
-    @Update
-    fun updateVocabulary(vocabulary : Vocabulary)
+    @Query("UPDATE vocabularyTable SET " +
+            "vocabulary = :vocabularyName, " +
+            "vocabularyTranslation = :vocabularyTranslation, " +
+            "sampleSentence = :sampleSentence " +
+            "WHERE vocabularyID = :vocabularyID")
+    fun updateVocabulary(vocabularyID : Int, vocabularyName : String?, vocabularyTranslation : String?, sampleSentence : String?)
 
     @Delete
     fun deleteVocabulary(vocabulary: Vocabulary)

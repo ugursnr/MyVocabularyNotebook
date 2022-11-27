@@ -17,10 +17,7 @@
         android:right="0dp"
         android:bottom="0dp"
         />
-    <size
-        android:width="@dimen/_225sdp"
-        android:height="@dimen/_52sdp"
-        />
+
     <stroke
         android:width="@dimen/_1sdp"
         android:color="@color/Palette1"

@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/general_title_color"
-        android:textSize="@dimen/_15ssp"
-        android:layout_marginTop="@dimen/_7sdp"
+        android:textSize="@dimen/_18ssp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_7sdp"
         android:textStyle="bold"
 
@@ -53,6 +53,8 @@
             android:foreground="@drawable/ic_baseline_add_24"
             android:foregroundGravity="center"
             android:backgroundTint="@color/fab_background_color"
+            android:elevation="18dp"
+            android:padding="1dp"
             />
 
     </LinearLayout>

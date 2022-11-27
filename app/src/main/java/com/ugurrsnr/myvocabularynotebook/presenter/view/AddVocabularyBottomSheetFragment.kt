@@ -87,7 +87,7 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
                     val updatedVocabulary = Vocabulary(vocabularyInput, translationInput, sampleSentenceInput )
                     updatedVocabulary.vocabularyID = vocabularyIDArgs
 
-                    sharedViewModel.updateVocabulary(vocabulary)
+                    updateVocabularyOnDB(vocabularyIDArgs,vocabularyInput ,translationInput,sampleSentenceInput)
                     dismiss()
                     sharedViewModel.getAllVocabulariesFromDB()
                 }
@@ -104,8 +104,8 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
         sharedViewModel.insertVocabulary(vocabulary)
     }
 
-    private fun updateVocabularyOnDB(vocabulary : Vocabulary){
-        sharedViewModel.updateVocabulary(vocabulary)
+    private fun updateVocabularyOnDB(vocabularyID : Int, vocabularyName : String?, vocabularyTranslation : String?, sampleSentence : String?){
+        sharedViewModel.updateVocabulary(vocabularyID, vocabularyName , vocabularyTranslation, sampleSentence)
     }
 
     private fun setUIWithVocabularyInfo(vocabularyName : String?, translation : String?, sample : String?){

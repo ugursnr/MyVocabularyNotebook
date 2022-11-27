@@ -8,6 +8,8 @@
     android:orientation="horizontal"
     android:background="@drawable/text_background_shape2"
     android:layout_margin="@dimen/_4sdp"
+    android:elevation="18dp"
+    android:padding="1dp"
     >
     <LinearLayout
         android:layout_width="wrap_content"
@@ -16,6 +18,8 @@
         android:layout_weight="3"
         android:layout_gravity="center"
         android:paddingLeft="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:paddingTop="@dimen/_8sdp"
 
         >
         <TextView

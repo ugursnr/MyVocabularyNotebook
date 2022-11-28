@@ -13,4 +13,6 @@
     <string name="update_vocabulary">Update</string>
 
     <string name="update">Update</string>
+    <string name="btn_answer">Choice</string>
+
 </resources>

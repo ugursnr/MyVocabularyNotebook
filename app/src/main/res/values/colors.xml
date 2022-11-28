@@ -14,4 +14,6 @@
     <color name="darkwhiteBackground">#B1ADAD</color>
     <color name="darkGreyBackground">#181818</color>
     <color name="Palette1">#36622B</color>
+
+    <color name="grey">#454545</color>
 </resources>

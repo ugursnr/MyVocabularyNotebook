@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@drawable/text_background_shape2"
+    android:background="@drawable/recycler_row_shape"
     android:layout_margin="@dimen/_4sdp"
     android:elevation="18dp"
     android:padding="1dp"
@@ -50,13 +50,13 @@
         >
         <ImageView
             android:id="@+id/deleteButtonRV"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/trash"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/incorrect_new"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint = "@color/darkwhiteBackground"
+            app:tint = "@color/grey"
             android:layout_marginEnd="@dimen/_5sdp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

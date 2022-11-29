@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:background="@drawable/recycler_row_shape"
     android:layout_margin="@dimen/_4sdp"
-    android:elevation="18dp"
+    android:elevation="8dp"
     android:padding="1dp"
     >
     <LinearLayout
@@ -27,8 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ENGLISH"
-            android:textSize="@dimen/_14ssp"
-            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
             android:fontFamily="@font/myfont"
             />
         <TextView
@@ -36,9 +36,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Turkish"
-            android:textSize="@dimen/_13ssp"
+            android:textSize="@dimen/_10ssp"
             android:textStyle="italic"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
 
             />
 
@@ -50,9 +50,9 @@
         >
         <ImageView
             android:id="@+id/deleteButtonRV"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:src="@drawable/incorrect_new"
+            android:layout_width="@dimen/_17sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:src="@drawable/closelineicon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -54,7 +55,7 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
 
                 val inputVocabulary = Vocabulary(vocabularyInput,translationInput,sampleSentenceInput)
                 insertVocabularyToDB(inputVocabulary)
-
+                Toast.makeText(context,R.string.succesfull_add,Toast.LENGTH_SHORT).show()
                 dismiss()
                 sharedViewModel.getAllVocabulariesFromDB()
 
@@ -88,6 +89,8 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
                     updatedVocabulary.vocabularyID = vocabularyIDArgs
 
                     updateVocabularyOnDB(vocabularyIDArgs,vocabularyInput ,translationInput,sampleSentenceInput)
+                    Toast.makeText(context,R.string.successfull_update,Toast.LENGTH_SHORT).show()
+
                     dismiss()
                     sharedViewModel.getAllVocabulariesFromDB()
                 }

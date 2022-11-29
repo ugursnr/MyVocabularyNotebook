@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
         android:hint="@string/vocabulary"
+        android:textSize="@dimen/_12ssp"
 
         />
     <EditText
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
         android:hint="@string/translation"
+        android:textSize="@dimen/_12ssp"
 
         />
     <EditText
@@ -29,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
         android:hint="@string/sample_sentence"
+        android:textSize="@dimen/_12ssp"
 
         />
 
@@ -40,8 +43,9 @@
         android:text="@string/add_vocabulary"
         android:textAllCaps="false"
         android:textSize="@dimen/_12ssp"
-        android:background ="@drawable/button_shape2_main"
+        android:background ="@drawable/button_background"
         android:layout_margin="@dimen/_5sdp"
+        android:textColor="@color/white"
 
         />
 

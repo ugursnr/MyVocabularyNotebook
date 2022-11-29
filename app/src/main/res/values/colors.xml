@@ -15,5 +15,8 @@
     <color name="darkGreyBackground">#181818</color>
     <color name="Palette1">#36622B</color>
 
-    <color name="grey">#454545</color>
+    <color name="grey">#8C8C8C</color>
+    <color name="soft_grey">#BAC8C7C7</color>
+    <color name="text_back">#05377b </color>
+
 </resources>

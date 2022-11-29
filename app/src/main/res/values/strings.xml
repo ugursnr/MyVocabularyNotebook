@@ -15,4 +15,6 @@
     <string name="update">Update</string>
     <string name="btn_answer">Choice</string>
 
+    <string name="succesfull_add">Vocabulary added.</string>
+    <string name="successfull_update">Vocabulary updated.</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.ugurrsnr.myvocabularynotebook.presenter.view
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +41,8 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         //sharedViewModel = ViewModelProvider(this)[AddVocabularySharedViewModel::class.java]
         sharedViewModel = ViewModelProvider(requireActivity()).get(AddVocabularySharedViewModel::class.java)
 
@@ -46,22 +50,28 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
             vocabularyIDArgs = AddVocabularyBottomSheetFragmentArgs.fromBundle(it).vocabularyID
         }
 
-        if ( vocabularyIDArgs == -1){
+        if ( vocabularyIDArgs == -1){ //Checking the word is new or not
             binding.addOrUpdateVocabularyButton.setOnClickListener {
 
                 vocabularyInput = binding.vocabularyActualET.text.toString()
                 translationInput = binding.vocabularyTranslationET.text.toString()
                 sampleSentenceInput = binding.vocabularySampleSentenceET.text.toString()
+                println("dadasdasd")
+                println(vocabularyInput)
 
-                val inputVocabulary = Vocabulary(vocabularyInput,translationInput,sampleSentenceInput)
-                insertVocabularyToDB(inputVocabulary)
-                Toast.makeText(context,R.string.succesfull_add,Toast.LENGTH_SHORT).show()
-                dismiss()
-                sharedViewModel.getAllVocabulariesFromDB()
+                if(vocabularyInput == null || vocabularyInput == ""){
+                    Toast.makeText(context, R.string.please_enter_a_vocabulary,Toast.LENGTH_LONG).show()
+                }else{
+                    val inputVocabulary = Vocabulary(vocabularyInput,translationInput,sampleSentenceInput)
+                    insertVocabularyToDB(inputVocabulary)
+                    Toast.makeText(context,R.string.succesfull_add,Toast.LENGTH_SHORT).show()
+                    dismiss()
+                    sharedViewModel.getAllVocabulariesFromDB()
+                }
 
             }
         }else{
-
+            //This block update an existing vocabulary
 
             sharedViewModel.getVocabularyDetailsByID(vocabularyIDArgs)
             sharedViewModel.vocabularyLiveData.observe(viewLifecycleOwner, Observer {
@@ -97,8 +107,6 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
             }
 
         }
-
-
 
 
     }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,8 @@ import com.ugurrsnr.myvocabularynotebook.databinding.FragmentHomeBinding
 import com.ugurrsnr.myvocabularynotebook.presenter.MainActivity
 import com.ugurrsnr.myvocabularynotebook.presenter.adapter.VocabulariesHomeAdapter
 import com.ugurrsnr.myvocabularynotebook.presenter.viewmodel.AddVocabularySharedViewModel
+import android.view.MotionEvent
+import android.view.View.OnTouchListener
 
 
 class HomeFragment : Fragment() {
@@ -28,11 +31,14 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(layoutInflater,container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         //sharedViewModel = ViewModelProvider(this)[AddVocabularySharedViewModel::class.java]
         sharedViewModel = ViewModelProvider(requireActivity()).get(AddVocabularySharedViewModel::class.java)
@@ -86,3 +92,6 @@ class HomeFragment : Fragment() {
 
 
 }
+/*
+
+ */

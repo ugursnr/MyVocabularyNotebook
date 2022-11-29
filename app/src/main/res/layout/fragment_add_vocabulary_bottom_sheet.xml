@@ -1,52 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presenter.view.AddVocabularyBottomSheetFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:backgroundTint="@color/soft_grey">
 
-    <EditText
-        android:id="@+id/vocabularyActualET"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:hint="@string/vocabulary"
-        android:textSize="@dimen/_12ssp"
+        app:cardElevation="8dp"
+        android:padding="1dp"
+        >
 
-        />
-    <EditText
-        android:id="@+id/vocabularyTranslationET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:hint="@string/translation"
-        android:textSize="@dimen/_12ssp"
+        <ImageView
+            android:src="@drawable/text_title_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
 
-        />
-    <EditText
-        android:id="@+id/vocabularySampleSentenceET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:hint="@string/sample_sentence"
-        android:textSize="@dimen/_12ssp"
+        <TextView
+            android:id="@+id/addNewVocabularyTV"
+            android:text = "@string/add_new_vocabulary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:textStyle="bold"
 
-        />
+            />
 
-    <Button
-        android:id="@+id/addOrUpdateVocabularyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/add_vocabulary"
-        android:textAllCaps="false"
-        android:textSize="@dimen/_12ssp"
-        android:background ="@drawable/button_background"
-        android:layout_margin="@dimen/_5sdp"
-        android:textColor="@color/white"
 
-        />
+    </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/vocabularyActualET"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:hint="@string/vocabulary"
+            android:textSize="@dimen/_12ssp"
+            android:background="@drawable/recycler_row_shape"
+            android:elevation="8dp"
+            android:padding="@dimen/_5sdp"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+
+            />
+        <EditText
+            android:id="@+id/vocabularyTranslationET"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:hint="@string/translation"
+            android:textSize="@dimen/_12ssp"
+            android:background="@drawable/recycler_row_shape"
+            android:elevation="8dp"
+            android:padding="@dimen/_5sdp"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+
+            />
+        <EditText
+            android:id="@+id/vocabularySampleSentenceET"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:hint="@string/sample_sentence"
+            android:textSize="@dimen/_12ssp"
+            android:background="@drawable/recycler_row_shape"
+            android:elevation="8dp"
+            android:padding="@dimen/_5sdp"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            />
+
+        <Button
+            android:id="@+id/addOrUpdateVocabularyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:text="@string/add_vocabulary"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_12ssp"
+            android:background ="@drawable/button_background"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/_10sdp"
+            />
+
+
 
 </LinearLayout>

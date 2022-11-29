@@ -17,4 +17,10 @@
 
     <string name="succesfull_add">Vocabulary added.</string>
     <string name="successfull_update">Vocabulary updated.</string>
+
+    <string name="add_new_vocabulary">Add New Vocabulary</string>
+    <string name="update_new_vocabulary">Update Vocabulary</string>
+
+    <string name="please_enter_a_vocabulary">Please enter a vocabulary.</string>
+
 </resources>

@@ -10,7 +10,6 @@
     android:orientation="vertical"
     android:backgroundTint="@color/soft_grey">
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +35,6 @@
             android:textStyle="bold"
 
             />
-
 
     </androidx.cardview.widget.CardView>
 
@@ -65,7 +63,7 @@
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_7sdp"
-            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_7sdp"
             app:maxImageSize="@dimen/_40sdp"
             android:scaleType="center"

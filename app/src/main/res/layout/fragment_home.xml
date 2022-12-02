@@ -48,15 +48,29 @@
         android:layout_marginEnd="@dimen/_7sdp"
         android:layout_weight="1"/>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:padding="1dp">
 
-        <View
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/_12ssp"
+            android:text="@string/add_neww_vocabulary"
+            android:layout_gravity="center"
+            android:textColor="@color/add_vocabulary_color"
+            android:gravity="center"
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addVocabularyButton"

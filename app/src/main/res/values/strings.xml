@@ -25,4 +25,11 @@
 
     <string name="add_neww_vocabulary">Add new vocabulary</string>
 
+    <string name="get_started">Get started</string>
+    <string name="next">Next</string>
+
+    <string name="onboard_title1">Learning is easy now</string>
+    <string name="onboard_title2">Add your first vocabulary</string>
+
+
 </resources>

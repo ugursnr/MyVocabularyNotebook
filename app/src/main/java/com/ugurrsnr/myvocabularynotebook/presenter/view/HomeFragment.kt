@@ -5,19 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ugurrsnr.myvocabularynotebook.R
 import com.ugurrsnr.myvocabularynotebook.databinding.FragmentHomeBinding
-import com.ugurrsnr.myvocabularynotebook.presenter.MainActivity
 import com.ugurrsnr.myvocabularynotebook.presenter.adapter.VocabulariesHomeAdapter
 import com.ugurrsnr.myvocabularynotebook.presenter.viewmodel.AddVocabularySharedViewModel
-import android.view.MotionEvent
-import android.view.View.OnTouchListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 
 
 class HomeFragment : Fragment() {
@@ -26,6 +22,9 @@ class HomeFragment : Fragment() {
 
     private var vocabularyAdapter = VocabulariesHomeAdapter()
     private lateinit var sharedViewModel: AddVocabularySharedViewModel
+
+    lateinit var mAdView : AdView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +37,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        mAdView= binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         //sharedViewModel = ViewModelProvider(this)[AddVocabularySharedViewModel::class.java]
         sharedViewModel = ViewModelProvider(requireActivity()).get(AddVocabularySharedViewModel::class.java)

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presenter.view.SplashScreenActivity"
+    tools:context=".presenter.view.SplashScreenFragment"
     android:background="@color/white"
     >
 
@@ -14,7 +14,7 @@
         android:id="@+id/iv_logo"
         android:layout_width="@dimen/_90sdp"
         android:layout_height="@dimen/_90sdp"
-        android:src="@drawable/logo"
+        android:src="@drawable/logo_yazisiz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,3 +34,5 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

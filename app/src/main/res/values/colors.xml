@@ -20,5 +20,8 @@
     <color name="text_back">#05377b </color>
 
     <color name="add_vocabulary_color">#8E8D8D</color>
+    <color name="on_board_descripton">#2B2A2A</color>
+
+    <color name="on_board_progress">#90BCF8</color>
 
 </resources>

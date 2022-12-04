@@ -54,8 +54,6 @@ class AddVocabularyBottomSheetFragment : BottomSheetDialogFragment() {
                 vocabularyInput = binding.vocabularyActualET.text.toString()
                 translationInput = binding.vocabularyTranslationET.text.toString()
                 sampleSentenceInput = binding.vocabularySampleSentenceET.text.toString()
-                println("dadasdasd")
-                println(vocabularyInput)
 
                 if(vocabularyInput == null || vocabularyInput == ""){
                     Toast.makeText(context, R.string.please_enter_a_vocabulary,Toast.LENGTH_LONG).show()

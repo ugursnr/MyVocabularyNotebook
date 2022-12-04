@@ -25,11 +25,13 @@
 
     <string name="add_neww_vocabulary">Add new vocabulary</string>
 
+    <!-- On Board -->
     <string name="get_started">Get started</string>
     <string name="next">Next</string>
 
-    <string name="onboard_title1">Learning is easy now</string>
+    <string name="onboard_title1">Welcome to Vocabulary Notebook</string>
     <string name="onboard_title2">Add your first vocabulary</string>
-
+    <string name="onboard_description1">You can write down the words in the language you want to learn and their translations in your own language.</string>
+    <string name="onboard_description2">You can add sample sentences for the words you have noted and update them whenever you want. We wish you the best in your learning process.</string>
 
 </resources>

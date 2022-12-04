@@ -37,6 +37,7 @@
             />
 
     </androidx.cardview.widget.CardView>
+    <!--ca-app-pub-5665271353670056/7830050295 -->
 
     <com.google.android.gms.ads.AdView
 
@@ -47,6 +48,7 @@
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
         android:layout_gravity="center"
+        android:visibility="gone"
         >
     </com.google.android.gms.ads.AdView>
 

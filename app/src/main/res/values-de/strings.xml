@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Mein Vokabelheft</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="home_title">Meine Vokabulare</string>
+
+    <string name="vocabulary">Vokabeln</string>
+    <string name="translation">Übersetzung</string>
+    <string name="sample_sentence">Beispielsatz</string>
+
+    <string name="add_vocabulary">Hinzufügen</string>
+    <string name="update_vocabulary">Update</string>
+
+    <string name="update">Update</string>
+    <string name="btn_answer">Auswahl</string>
+
+    <string name="succesfull_add">Vokabeln hinzugefügt.</string>
+    <string name="successfull_update">Vokabeln aktualisiert.</string>
+
+    <string name="add_new_vocabulary">Neue Vokabeln hinzufügen</string>
+    <string name="update_new_vocabulary">Vokabular aktualisieren</string>
+
+    <string name="please_enter_a_vocabulary">Bitte geben Sie ein Vokabular ein.</string>
+
+    <string name="add_neww_vocabulary">Neue Vokabeln hinzufügen</string>
+
+    <!-- On Board -->
+    <string name="get_started">Los geht\'s</string>
+    <string name="next">Weiter</string>
+
+    <string name="onboard_title1">Willkommen Beim Vokabelheft</string>
+    <string name="onboard_title2">Fügen Sie Ihr erstes Vokabular hinzu</string>
+    <string name="onboard_description1">Sie können die Wörter in der Sprache, die Sie lernen möchten, und ihre Übersetzungen in Ihrer eigenen Sprache aufschreiben.</string>
+    <string name="onboard_description2">Sie können Beispielsätze zu den von Ihnen notierten Wörtern hinzufügen und diese jederzeit aktualisieren. Wir wünschen Ihnen viel Erfolg bei Ihrem Lernprozess.</string>
+
+</resources>

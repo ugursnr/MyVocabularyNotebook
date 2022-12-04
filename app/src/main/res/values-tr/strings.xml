@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Kelime Defterim</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="home_title">Kelimelerim</string>
+
+    <string name="vocabulary">Kelime</string>
+    <string name="translation">Çevirisi</string>
+    <string name="sample_sentence">Örnek Cümle</string>
+
+    <string name="add_vocabulary">Ekle</string>
+    <string name="update_vocabulary">Güncelle</string>
+
+    <string name="update">Güncelle</string>
+    <string name="btn_answer">Seçenek</string>
+
+    <string name="succesfull_add">Kelime eklendi.</string>
+    <string name="successfull_update">Kelime güncellendi.</string>
+
+    <string name="add_new_vocabulary">Yeni kelime ekleyin</string>
+    <string name="update_new_vocabulary">Kelimeyi güncelleyin</string>
+
+    <string name="please_enter_a_vocabulary">Lütfen bir kelime girin.</string>
+
+    <string name="add_neww_vocabulary">Yeni kelime ekleyin</string>
+
+    <!-- On Board -->
+    <string name="get_started">Başlayalım</string>
+    <string name="next">İleri</string>
+
+    <string name="onboard_title1">Kelime Defterim\'e Hoşgeldiniz</string>
+    <string name="onboard_title2">İlk kelimenizi ekleyin</string>
+    <string name="onboard_description1">Öğrenmek istediğiniz dildeki kelimeleri ve kendi dilinizdeki çevirilerini ekleyebilirsiniz.</string>
+    <string name="onboard_description2">Not aldığınız kelimeler için örnek cümleler ekleyebilir ve istediğiniz zaman güncelleyebilirsiniz. Öğrenme sürecenizde başarılar dileriz.</string>
+
+</resources>

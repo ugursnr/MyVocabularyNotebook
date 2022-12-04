@@ -38,13 +38,17 @@ class SplashScreenFragment : Fragment() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         Handler().postDelayed({
+            findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToViewPagerFragment())
 
+            /*
             if (onBoardingFinished()) {
                 findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomeFragment())
             } else {
                 findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToViewPagerFragment())
 
             }
+
+             */
         }, 2000)
 
         return binding.root

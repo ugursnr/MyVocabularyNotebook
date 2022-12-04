@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Mon Carnet de Vocabulaire</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="home_title">Mes Vocabulaires</string>
+
+    <string name="vocabulary">Vocabulaire</string>
+    <string name="translation">Traduction</string>
+    <string name="sample_sentence">Exemple de Phrase</string>
+
+    <string name="add_vocabulary">Ajouter</string>
+    <string name="update_vocabulary">Mise à jour</string>
+
+    <string name="update">Mise à jour</string>
+    <string name="btn_answer">Choix</string>
+
+    <string name="succesfull_add">Vocabulaire ajouté.</string>
+    <string name="successfull_update">Vocabulaire mis à jour.</string>
+
+    <string name="add_new_vocabulary">Ajouter un Nouveau Vocabulaire</string>
+    <string name="update_new_vocabulary">Mise à Jour du Vocabulaire</string>
+
+    <string name="please_enter_a_vocabulary">Veuillez entrer un vocabulaire.</string>
+
+    <string name="add_neww_vocabulary">Ajouter du nouveau vocabulaire</string>
+
+    <!-- On Board -->
+    <string name="get_started">Commençons</string>
+    <string name="next">Suivant</string>
+
+    <string name="onboard_title1">Bienvenue au Carnet de Vocabulaire</string>
+    <string name="onboard_title2">Ajoutez votre premier vocabulaire</string>
+    <string name="onboard_description1">Vous pouvez écrire les mots dans la langue que vous voulez apprendre et leur traduction dans votre propre langue.</string>
+    <string name="onboard_description2">Vous pouvez ajouter des phrases types pour les mots que vous avez notés et les mettre à jour quand vous le souhaitez. Nous vous souhaitons le meilleur dans votre processus d\'apprentissage.</string>
+
+</resources>

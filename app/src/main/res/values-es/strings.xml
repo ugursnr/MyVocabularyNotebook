@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Mi Cuaderno de Vocabulario</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="home_title">Mis Vocabularios</string>
+
+    <string name="vocabulary">Vocabulario</string>
+    <string name="translation">Traducción</string>
+    <string name="sample_sentence">Ejemplo de Sentencia</string>
+
+    <string name="add_vocabulary">Añadir</string>
+    <string name="update_vocabulary">Actualización</string>
+
+    <string name="update">Actualización</string>
+    <string name="btn_answer">Elección</string>
+
+    <string name="succesfull_add">Vocabulario añadido.</string>
+    <string name="successfull_update">Vocabulario actualizado.</string>
+
+    <string name="add_new_vocabulary">Añadir Nuevo Vocabulario</string>
+    <string name="update_new_vocabulary">Actualizar el Vocabulario</string>
+
+    <string name="please_enter_a_vocabulary">Por favor, introduzca un vocabulario.</string>
+
+    <string name="add_neww_vocabulary">Añadir nuevo vocabulario</string>
+
+    <!-- On Board -->
+    <string name="get_started">Comencemos</string>
+    <string name="next">Siguiente</string>
+
+    <string name="onboard_title1">Bienvenido al Cuaderno de Vocabulario</string>
+    <string name="onboard_title2">Añade tu Primer Vocabulario</string>
+    <string name="onboard_description1">Puedes escribir las palabras en el idioma que quieres aprender y sus traducciones en tu propio idioma.</string>
+    <string name="onboard_description2">Puedes añadir frases de ejemplo para las palabras que has anotado y actualizarlas cuando quieras. Te deseamos lo mejor en tu proceso de aprendizaje.</string>
+
+</resources>

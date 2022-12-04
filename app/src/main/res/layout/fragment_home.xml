@@ -15,13 +15,8 @@
         android:layout_height="wrap_content"
         app:cardElevation="8dp"
         android:padding="1dp"
-        >
 
-        <ImageView
-            android:src="@drawable/text_title_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
+        >
 
         <TextView
             android:text = "@string/home_title"
@@ -33,6 +28,7 @@
             android:paddingLeft="@dimen/_12sdp"
             android:paddingBottom="@dimen/_10sdp"
             android:textStyle="bold"
+            android:background="@drawable/text_title_background"
 
             />
 

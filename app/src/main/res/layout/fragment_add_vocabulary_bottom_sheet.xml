@@ -97,6 +97,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:textColor="@color/white"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
             />
 
 

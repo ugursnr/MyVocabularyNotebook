@@ -18,8 +18,6 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5665271353670056~5239977177" />
 
-
-
         <activity
             android:name=".presenter.MainActivity"
             android:exported="true"

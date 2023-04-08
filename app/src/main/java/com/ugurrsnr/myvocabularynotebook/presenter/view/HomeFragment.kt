@@ -1,6 +1,5 @@
 package com.ugurrsnr.myvocabularynotebook.presenter.view
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -21,6 +20,7 @@ import com.google.android.gms.ads.AdView
 import com.ugurrsnr.myvocabularynotebook.premium.Security
 import com.ugurrsnr.myvocabularynotebook.presenter.MainActivity
 import java.io.IOException
+import java.util.concurrent.Executors
 
 
 class HomeFragment : Fragment() {
@@ -34,11 +34,13 @@ class HomeFragment : Fragment() {
 
     //Purchase
 
-    private lateinit var billingClient : BillingClient
+    private var billingClient : BillingClient? = null
     private lateinit var productDetails : ProductDetails
     private var selectedOfferToken : String? = null
 
     private var isSuccess = false
+    var description : String? = null
+    var productName : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,7 +87,7 @@ class HomeFragment : Fragment() {
             .build()
 
 
-
+        getPrice()
         subscribeBtn()
     }
 
@@ -94,9 +96,9 @@ class HomeFragment : Fragment() {
     private fun subscribeBtn() {
         binding.startPremiumBtn.setOnClickListener {
 
-            billingClient.startConnection(object : BillingClientStateListener {
+            billingClient!!.startConnection(object : BillingClientStateListener {
                 override fun onBillingServiceDisconnected() {
-                    TODO("Not yet implemented")
+                    Log.d("Premium", "onBillingServiceDisconnected - çalıştı")
                 }
 
                 override fun onBillingSetupFinished(billingResult: BillingResult) {
@@ -110,7 +112,7 @@ class HomeFragment : Fragment() {
 
                     val params = QueryProductDetailsParams.newBuilder()
                         .setProductList(productList)
-                    billingClient.queryProductDetailsAsync(params.build()) { billingResult, productDetailsList ->
+                    billingClient!!.queryProductDetailsAsync(params.build()) { billingResult, productDetailsList ->
 
                         for (productDetails in productDetailsList) {
 
@@ -127,7 +129,7 @@ class HomeFragment : Fragment() {
                             val billingFlowParams = BillingFlowParams.newBuilder()
                                 .setProductDetailsParamsList(productDetailsParamsList)
                                 .build()
-                            val billingResult = billingClient.launchBillingFlow(
+                            val billingResult = billingClient!!.launchBillingFlow(
                                 activity as MainActivity,
                                 billingFlowParams
                             )
@@ -155,8 +157,9 @@ class HomeFragment : Fragment() {
                 binding.subscriptionStatusTV.text = "Feature Not Supported"
 
             }else{
+                //Kullanıcı ödeme  bottom sheet'i kapatırsa bu çalışıyor
                 Toast.makeText(requireContext(),"Error : ${billingResult.debugMessage}",Toast.LENGTH_LONG).show()
-                Log.d("Premium","Error : ${billingResult.debugMessage}")
+                Log.d("Premium","Error : ${billingResult.debugMessage} - olmadı")
             }
         }
     private fun handlePurchase(purchase: Purchase){
@@ -164,13 +167,13 @@ class HomeFragment : Fragment() {
             .setPurchaseToken(purchase.purchaseToken)
             .build()
 
-        val listener = ConsumeResponseListener{billingResult, s ->
+        val consumeResponseListener = ConsumeResponseListener{ billingResult, s ->
             if ( billingResult.responseCode == BillingClient.BillingResponseCode.OK){
 
 
             }
         }
-        billingClient.consumeAsync(consumeParams, listener)
+        billingClient!!.consumeAsync(consumeParams, consumeResponseListener)
         if(purchase.purchaseState == Purchase.PurchaseState.PURCHASED){
 
             if(!verifyValidSignature(purchase.originalJson,purchase.signature)){
@@ -182,17 +185,22 @@ class HomeFragment : Fragment() {
                 val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
                     .setPurchaseToken(purchase.purchaseToken)
                     .build()
-                billingClient.acknowledgePurchase(acknowledgePurchaseParams,acknowledgePurchaseResponseListener)
+                billingClient!!.acknowledgePurchase(acknowledgePurchaseParams,acknowledgePurchaseResponseListener)
                 binding.subscriptionStatusTV.text = "Subscribed"
                 isSuccess = true
             }else{
                 binding.subscriptionStatusTV.text = "Already Subscribed"
+                Log.d("Premium","Already Subscribed")
             }
         }else if(purchase.purchaseState == Purchase.PurchaseState.PENDING){
             binding.subscriptionStatusTV.text = "PENDING"
+            Log.d("Premium","PENDING")
+
 
         }else if(purchase.purchaseState == Purchase.PurchaseState.UNSPECIFIED_STATE){
             binding.subscriptionStatusTV.text = "UNSPECIFIED_STATE"
+            Log.d("Premium","UNSPECIFIED_STATE")
+
 
         }
 
@@ -217,6 +225,61 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun getPrice(){
+        billingClient!!.startConnection(object : BillingClientStateListener{
+            override fun onBillingServiceDisconnected() {
+                TODO("Not yet implemented")
+            }
+
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                val executorService = Executors.newSingleThreadExecutor()
+
+                executorService.execute{
+                    val productList = listOf(
+                        QueryProductDetailsParams.Product.newBuilder()
+                            .setProductId("vocabulary_notebook")
+                            .setProductType(BillingClient.ProductType.SUBS)
+                            .build()
+                    )
+
+                    val params = QueryProductDetailsParams.newBuilder().setProductList(productList)
+                    billingClient!!.queryProductDetailsAsync(params.build()){billingResult, productDetailsList ->
+                        for (productDetails in productDetailsList) {
+
+                            val productPrice =
+                                productDetails.subscriptionOfferDetails?.get(0)?.pricingPhases?.pricingPhaseList?.get(0)?.formattedPrice
+
+                            val des = productDetails.description
+                            productName = productDetails.name
+                            description = "$productName : $des : price : $productPrice"
+
+                        }
+
+                    }
+
+                }
+                activity?.runOnUiThread(object : Runnable{
+                    override fun run() {
+                        Thread.sleep(1000)
+
+                        binding.benefitsTV.text = description
+                        Log.d("Premium", "Benefits $description")
+                    }
+
+                })
+
+            }
+
+        })
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (billingClient != null){
+            billingClient!!.endConnection()
+        }
+    }
 
 
     private fun prepareRecyclerView(){

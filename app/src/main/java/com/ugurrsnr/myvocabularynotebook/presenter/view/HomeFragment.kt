@@ -2,10 +2,12 @@ package com.ugurrsnr.myvocabularynotebook.presenter.view
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -16,7 +18,9 @@ import com.ugurrsnr.myvocabularynotebook.presenter.adapter.VocabulariesHomeAdapt
 import com.ugurrsnr.myvocabularynotebook.presenter.viewmodel.AddVocabularySharedViewModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.ugurrsnr.myvocabularynotebook.premium.Security
 import com.ugurrsnr.myvocabularynotebook.presenter.MainActivity
+import java.io.IOException
 
 
 class HomeFragment : Fragment() {
@@ -29,19 +33,12 @@ class HomeFragment : Fragment() {
     lateinit var mAdView : AdView
 
     //Purchase
-    /*
-    private val purchasesUpdatedListener =
-        PurchasesUpdatedListener { billingResult, purchases ->
-            // To be implemented in a later section.
-        }
 
+    private lateinit var billingClient : BillingClient
+    private lateinit var productDetails : ProductDetails
+    private var selectedOfferToken : String? = null
 
-     */
-    //private lateinit var billingClient : BillingClient
-
-
-    //private lateinit var productDetails : ProductDetails
-    //private var selectedOfferToken : String? = null
+    private var isSuccess = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,29 +79,143 @@ class HomeFragment : Fragment() {
 
 
         //purchase
-        /*
         billingClient = BillingClient.newBuilder(requireContext())
             .setListener(purchasesUpdatedListener)
             .enablePendingPurchases()
             .build()
 
-        billingClient.startConnection(object : BillingClientStateListener {
-            override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode ==  BillingClient.BillingResponseCode.OK) {
-                    // The BillingClient is ready. You can query purchases here.
-                }
-            }
-            override fun onBillingServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-            }
-        })
-        //subscribeBtn()
 
-         */
+
+        subscribeBtn()
+    }
+
+
+
+    private fun subscribeBtn() {
+        binding.startPremiumBtn.setOnClickListener {
+
+            billingClient.startConnection(object : BillingClientStateListener {
+                override fun onBillingServiceDisconnected() {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onBillingSetupFinished(billingResult: BillingResult) {
+
+                    val productList = listOf(
+                        QueryProductDetailsParams.Product.newBuilder()
+                            .setProductId("vocabulary_notebook") //product id in play console
+                            .setProductType(BillingClient.ProductType.SUBS)
+                            .build()
+                    )
+
+                    val params = QueryProductDetailsParams.newBuilder()
+                        .setProductList(productList)
+                    billingClient.queryProductDetailsAsync(params.build()) { billingResult, productDetailsList ->
+
+                        for (productDetails in productDetailsList) {
+
+                            val offerToken =
+                                productDetails.subscriptionOfferDetails?.get(0)?.offerToken
+
+                            val productDetailsParamsList = listOf(offerToken?.let {
+                                BillingFlowParams.ProductDetailsParams.newBuilder()
+                                    .setProductDetails(productDetails)
+                                    .setOfferToken(it)
+                                    .build()
+                            })
+
+                            val billingFlowParams = BillingFlowParams.newBuilder()
+                                .setProductDetailsParamsList(productDetailsParamsList)
+                                .build()
+                            val billingResult = billingClient.launchBillingFlow(
+                                activity as MainActivity,
+                                billingFlowParams
+                            )
+                        }
+
+                    }
+                }
+
+            })
+        }
+    }
+
+    private val purchasesUpdatedListener =
+        PurchasesUpdatedListener { billingResult, Purchase ->
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && Purchase != null){
+                for (purchase in Purchase){
+                    handlePurchase(purchase)
+
+                }
+            }else if(billingResult.responseCode == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED){
+                binding.subscriptionStatusTV.text = "Subscribed"
+                isSuccess = true
+
+            }else if (billingResult.responseCode == BillingClient.BillingResponseCode.FEATURE_NOT_SUPPORTED){
+                binding.subscriptionStatusTV.text = "Feature Not Supported"
+
+            }else{
+                Toast.makeText(requireContext(),"Error : ${billingResult.debugMessage}",Toast.LENGTH_LONG).show()
+                Log.d("Premium","Error : ${billingResult.debugMessage}")
+            }
+        }
+    private fun handlePurchase(purchase: Purchase){
+        val consumeParams = ConsumeParams.newBuilder()
+            .setPurchaseToken(purchase.purchaseToken)
+            .build()
+
+        val listener = ConsumeResponseListener{billingResult, s ->
+            if ( billingResult.responseCode == BillingClient.BillingResponseCode.OK){
+
+
+            }
+        }
+        billingClient.consumeAsync(consumeParams, listener)
+        if(purchase.purchaseState == Purchase.PurchaseState.PURCHASED){
+
+            if(!verifyValidSignature(purchase.originalJson,purchase.signature)){
+                Toast.makeText(requireContext(), "Error Invalid purchase", Toast.LENGTH_LONG).show()
+                Log.d("Premium", "Error Invalid purchase")
+                return
+            }
+            if(!purchase.isAcknowledged){
+                val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
+                    .setPurchaseToken(purchase.purchaseToken)
+                    .build()
+                billingClient.acknowledgePurchase(acknowledgePurchaseParams,acknowledgePurchaseResponseListener)
+                binding.subscriptionStatusTV.text = "Subscribed"
+                isSuccess = true
+            }else{
+                binding.subscriptionStatusTV.text = "Already Subscribed"
+            }
+        }else if(purchase.purchaseState == Purchase.PurchaseState.PENDING){
+            binding.subscriptionStatusTV.text = "PENDING"
+
+        }else if(purchase.purchaseState == Purchase.PurchaseState.UNSPECIFIED_STATE){
+            binding.subscriptionStatusTV.text = "UNSPECIFIED_STATE"
+
+        }
+
+    }
+    var acknowledgePurchaseResponseListener = AcknowledgePurchaseResponseListener { billingResult ->
+
+        if(billingResult.responseCode == BillingClient.BillingResponseCode.OK){
+            binding.subscriptionStatusTV.text = "Subscribed"
+            isSuccess = true
+        }
 
     }
 
+    private fun verifyValidSignature(signedData : String, signature : String) : Boolean{
+        return try {
+            val base64Key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnQfc1GrGnkV3+ZmRkdN3O6SLYAErmTzZIyibuZxArWphLPkwlDxBryjTNXeEG7Erl5jJfPJpeMv9l5UsRsYqn+Hvzc7ZqwK6IUIn9GY0DDdqVLCw6Iaet0qQ3z1wozcBq7BFiE/uNaZj8eyhpNUWwGeA1qWErW5JGHBuswf4fgZ6Q+aNg9d89/1XBPpDcDGQuRm0W8mYFRYlcyELZgU9BM/pb29cv4Hp4N1SK7T8LgLoiAS4zWw7uKC9clmpMDO04ibF+yh01vbkoWDGWBwXxopwJBf2AbbRHumi6Qyaxz+y/icWmelv1scKK4lHccxmdRSnmoxB2wtz6fhmNPaMwQIDAQAB"
+            val security = Security()
+            security.verifyPurchase(base64Key,signedData,signature)
+        }catch (e : IOException){
+            false
+        }
+
+    }
 
 
 
@@ -132,61 +243,5 @@ class HomeFragment : Fragment() {
         })
     }
 
-    /*
-    private fun subscribeBtn(){
-        binding.startPremiumBtn.setOnClickListener {
-
-            val queryProductDetailsParams =
-                QueryProductDetailsParams.newBuilder()
-                    .setProductList(
-                        arrayListOf(
-                            QueryProductDetailsParams.Product.newBuilder()
-                                .setProductId("vocabulary_notebook")
-                                .setProductType(BillingClient.ProductType.SUBS)
-                                .build())
-                    )
-                    .build()
-
-            billingClient.queryProductDetailsAsync(queryProductDetailsParams) {
-                    billingResult,
-                    productDetailsList ->
-
-                productDetails = productDetailsList.first()
-
-                println("billingResult : $billingResult")
-                println("productDetailsList : $productDetailsList")
-
-
-            }
-
-            selectedOfferToken = productDetails.subscriptionOfferDetails?.let {
-                it.first().offerToken
-            }
-
-            val productDetailsParamsList = listOf(
-                BillingFlowParams.ProductDetailsParams.newBuilder()
-                    // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                    .setProductDetails(productDetails)
-                    // to get an offer token, call ProductDetails.subscriptionOfferDetails()
-                    // for a list of offers that are available to the user
-                    .setOfferToken(selectedOfferToken!!)
-                    .build()
-            )
-
-            val billingFlowParams = BillingFlowParams.newBuilder()
-                .setProductDetailsParamsList(productDetailsParamsList)
-                .build()
-
-// Launch the billing flow
-            val billingResult = billingClient.launchBillingFlow(activity as MainActivity, billingFlowParams)
-
-
-
-        }
-    }
-
-
-
-*/
 
 }

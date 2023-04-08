@@ -65,6 +65,23 @@
         >
     </com.google.android.gms.ads.AdView>
 
+
+    <TextView
+        android:id="@+id/subscriptionStatusTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subscription Status :"
+        android:textSize="@dimen/_15ssp"
+
+        />
+    <TextView
+        android:id="@+id/benefitsTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Benefits :"
+        android:textSize="@dimen/_15ssp"
+
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHome"
         android:layout_width="match_parent"

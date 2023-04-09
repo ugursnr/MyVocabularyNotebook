@@ -7,6 +7,8 @@ import java.security.*
 import java.security.spec.InvalidKeySpecException
 import java.security.spec.X509EncodedKeySpec
 
+
+/* Bu sınıf, home Fragment içinde yorumdaki kodlar için kullanıldı, şuan gerek yok ama çiçek
 class Security {
     private val KEY_FACTORY_ALGORITHM = "RSA"
     private val SIGNATURE_ALGORITHM = "SHA1withRSA"
@@ -64,3 +66,5 @@ class Security {
         return false
     }
 }
+
+ */
